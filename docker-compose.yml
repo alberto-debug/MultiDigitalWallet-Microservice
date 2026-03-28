@@ -1,0 +1,29 @@
+services:
+
+  postgres-user:
+    image: postgres:17
+    environment:
+      POSTGRES_DB: userdb
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_user_data:/var/lib/postgresql/data
+
+
+  user-service:
+    build:
+      context: "./user-service /user-service "
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8081'
+    depends_on:
+      - postgres-user
+    environment:
+      DB_URL: jdbc:postgresql://postgres-user:5432/userdb
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+volumes:
+  postgres_user_data:
