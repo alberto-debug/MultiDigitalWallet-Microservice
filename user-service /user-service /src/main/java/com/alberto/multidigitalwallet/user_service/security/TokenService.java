@@ -61,8 +61,6 @@ public class TokenService {
                     .verify(token)
                     .getSubject();
 
-
-
         } catch (JWTCreationException e) {
             log.warn("JWT verification failed: {}", e.getMessage());
             throw new TokenValidationException("Invalid or expired token", e);
