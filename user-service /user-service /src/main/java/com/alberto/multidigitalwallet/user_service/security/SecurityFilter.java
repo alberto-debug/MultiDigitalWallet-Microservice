@@ -38,12 +38,12 @@ public class SecurityFilter extends OncePerRequestFilter {
         String token = recoverToken(request);
         String email =  null;
 
+
         if (token != null){
             email = tokenService.validateToken(token);
         }
 
         if (email != null){
-
 
             User user = userRepository.findByEmail(email)
                     .orElseThrow(()-> new UsernameNotFoundException("User not found"));
@@ -71,5 +71,6 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
 
         return authHeader.substring(7);
+
     }
 }
