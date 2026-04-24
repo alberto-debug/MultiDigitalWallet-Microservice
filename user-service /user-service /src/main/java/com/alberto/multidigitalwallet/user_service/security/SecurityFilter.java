@@ -1,6 +1,5 @@
 package com.alberto.multidigitalwallet.user_service.security;
 
-
 import com.alberto.multidigitalwallet.user_service.model.entity.User;
 import com.alberto.multidigitalwallet.user_service.repository.UserRepository;
 import jakarta.servlet.FilterChain;
