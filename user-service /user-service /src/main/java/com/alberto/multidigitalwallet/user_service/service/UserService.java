@@ -48,7 +48,7 @@ public class UserService {
         newUser.setPassword(Objects.requireNonNull(passwordEncoder.encode(password)));
         newUser.getRoles().add(role);
 
-        return newUser;
+        return userRepository.save(newUser);
     }
 
     public User findByEmail(String email){
@@ -68,5 +68,7 @@ public class UserService {
         userRepository.delete(user);
         log.debug("User deleted: {}", id);
     }
+
+
 
 }

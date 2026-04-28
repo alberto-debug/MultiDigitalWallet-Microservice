@@ -4,19 +4,19 @@ import com.alberto.multidigitalwallet.user_service.model.Roles.Role;
 import com.alberto.multidigitalwallet.user_service.model.entity.User;
 import com.alberto.multidigitalwallet.user_service.repository.RoleRepository;
 import com.alberto.multidigitalwallet.user_service.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
-
 public class AdminSeeder implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -30,16 +30,16 @@ public class AdminSeeder implements CommandLineRunner {
     private String adminPassword;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String @NonNull ... args) {
 
-        if (roleRepository.findByName("ROLE_ADMIN").isPresent()){
-            log.info("Admin User already exists");
+
+        if (userRepository.findByEmail(adminEmail).isPresent()) {
+            log.info("Admin user already exists: {}", adminEmail);
             return;
         }
 
         Role adminRole = roleRepository.findByName("ROLE_ADMIN")
-                .orElseGet(()-> {
-
+                .orElseGet(() -> {
                     Role newRole = new Role();
                     newRole.setName("ROLE_ADMIN");
                     return roleRepository.save(newRole);
@@ -48,11 +48,10 @@ public class AdminSeeder implements CommandLineRunner {
         User admin = new User();
         admin.setName("ADMIN");
         admin.setEmail(adminEmail);
-        admin.setPassword(passwordEncoder.encode(adminPassword));
+        admin.setPassword(Objects.requireNonNull(passwordEncoder.encode(adminPassword)));
         admin.getRoles().add(adminRole);
 
         userRepository.save(admin);
         log.info("Admin user created: {}", adminEmail);
-
     }
 }
