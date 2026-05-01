@@ -21,7 +21,7 @@ public class TokenService {
     @Value("${KEY}")
     private String secret;
 
-    @Value("${JWT_EXPIRATION_MS:8640000}")
+    @Value("${JWT_EXPIRATION_MS:3600000}")
     private Long expirationMS;
 
     @Value("${JWT_ISSUER}")
