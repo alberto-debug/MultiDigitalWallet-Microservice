@@ -25,10 +25,8 @@ import java.util.Collections;
 @RequiredArgsConstructor
 public class SecurityFilter extends OncePerRequestFilter {
 
-
     private final TokenService tokenService;
     private final UserRepository userRepository;
-    private final SecurityFilterChain securityFilterChain;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

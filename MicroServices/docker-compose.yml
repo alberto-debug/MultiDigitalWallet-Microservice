@@ -18,7 +18,7 @@ services:
 
   user-service:
     build:
-      context: "./services/user-service/user-service "
+      context: "../MicroServices/userService"
       dockerfile: Dockerfile
     ports:
       - '8081:8081'
