@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="Implementation of AuthController and DTOs fixes">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /.dockerignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /.gitattributes" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /Dockerfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /compose.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/ApiResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/LoginRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/RegisterRequestDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/UserResponseDTO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/UserServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/controller/AuthController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/exception/RuntimeExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/exception/TokenGenerationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/exception/TokenValidationException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/model/Roles/Role.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/model/entity/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/repository/RoleRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/repository/UserRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/CustomUserDetailsService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityFilter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/TokenService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/sedders/AdminSeeder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/sedders/RoleSeeder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/service/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/test/java/com/alberto/multidigitalwallet/user_service/TestUserServiceApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/test/java/com/alberto/multidigitalwallet/user_service/TestcontainersConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/test/java/com/alberto/multidigitalwallet/user_service/UserServiceApplicationTests.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CopilotPersistence">
+    <persistenceIdMap>
+      <entry key="_/home/alberto/IdeaProjects/multidigitalwallet" value="3BaVuljhZ7stakujAWSXofvnwoa" />
+    </persistenceIdMap>
+  </component>
+  <component name="CopilotUserSelectedChatMode">
+    <option name="chatModeId" value="Agent" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Exception" />
+        <option value="Class" />
+        <option value="Record" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;alberto-debug&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:alberto-debug/MultiDigitalWallet-Microservice.git&quot;,
+    &quot;accountId&quot;: &quot;42641448-e869-4cd1-9dae-cdda3609a5f0&quot;
+  }
+}</component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHomeTypeForPersistence" value="WRAPPER" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3BaVuljhZ7stakujAWSXofvnwoa" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "Spring Boot.UserServiceApplication.executor": "Debug",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "userService",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/alberto/IdeaProjects/multidigitalwallet/services",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/user-service /user-service " />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/services" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/services/user-service" />
+      <recent name="$PROJECT_DIR$/" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-26" />
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="user-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.alberto.multidigitalwallet.user_service.UserServiceApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="" />
+      <created>1774727392532</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774727392532</updated>
+      <workItem from="1774727393818" duration="806000" />
+      <workItem from="1774728228232" duration="4089000" />
+      <workItem from="1774857227686" duration="705000" />
+      <workItem from="1774861970660" duration="3932000" />
+      <workItem from="1777060862652" duration="1515000" />
+      <workItem from="1777062403561" duration="2180000" />
+      <workItem from="1777413305159" duration="25000" />
+    </task>
+    <task id="LOCAL-00001" summary="chnages configs">
+      <option name="closed" value="true" />
+      <created>1774730887454</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1774730887455</updated>
+    </task>
+    <task id="LOCAL-00002" summary="UserService and Security Config implementation">
+      <option name="closed" value="true" />
+      <created>1777063337719</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1777063337720</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Fixes in UserService and additions in DTOs for login request and response.">
+      <option name="closed" value="true" />
+      <created>1777414657182</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1777414657182</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Readme">
+      <option name="closed" value="true" />
+      <created>1777415367556</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1777415367556</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Implementation of AuthController and DTOs fixes">
+      <option name="closed" value="true" />
+      <created>1777420077144</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1777420077144</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="chnages configs" />
+    <MESSAGE value="UserService and Security Config implementation" />
+    <MESSAGE value="Fixes in UserService and additions in DTOs for login request and response." />
+    <MESSAGE value="Readme" />
+    <MESSAGE value="Implementation of AuthController and DTOs fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Implementation of AuthController and DTOs fixes" />
+  </component>
+  <component name="github-copilot-workspace">
+    <instructionFileLocations>
+      <option value=".github/instructions" />
+    </instructionFileLocations>
+    <promptFileLocations>
+      <option value=".github/prompts" />
+    </promptFileLocations>
+  </component>
+</project>
