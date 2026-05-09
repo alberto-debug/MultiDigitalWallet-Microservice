@@ -15,8 +15,7 @@ import java.util.UUID;
 @Table(name = "wallets")
 @Getter
 @Setter
-public class wallet {
-
+public class Wallet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -31,7 +30,6 @@ public class wallet {
 
     @Enumerated(EnumType.STRING)
     private WalletStatus walletStatus;
-
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
