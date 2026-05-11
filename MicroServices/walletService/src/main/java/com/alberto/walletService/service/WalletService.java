@@ -4,6 +4,7 @@ package com.alberto.walletService.service;
 import com.alberto.walletService.DTOs.CreateWalletRequest;
 import com.alberto.walletService.DTOs.WalletResponse;
 import com.alberto.walletService.exception.WalletAlreadyExistsException;
+import com.alberto.walletService.exception.WalletNotFoundException;
 import com.alberto.walletService.mapper.WalletMapper;
 import com.alberto.walletService.model.ENUMs.WalletStatus;
 import com.alberto.walletService.model.Wallet;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -33,7 +35,6 @@ public class WalletService {
             );
         }
 
-
         Wallet wallet = new Wallet();
         wallet.setUserId(userId);
         wallet.setCurrency(request.currency());
@@ -44,4 +45,18 @@ public class WalletService {
         
         return walletMapper.toResponse(saved);
     }
+
+    public List<WalletResponse> getUserWallets(UUID userId){
+        return walletRepository.findByUserId(userId)
+                .stream()
+                .map(walletMapper::toResponse)
+                .toList();
+    }
+
+    public BigDecimal getBalance(UUID walletId){
+        return walletRepository.findById(walletId)
+                .orElseThrow(() -> new WalletNotFoundException("Wallet not found with id: " + walletId))
+                .getBalance();
+    }
+
 }

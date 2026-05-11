@@ -5,42 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="Implementation of AuthController and DTOs fixes">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /.dockerignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /Dockerfile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /compose.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /mvnw" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /mvnw.cmd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/ApiResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/LoginRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/RegisterRequestDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/DTOs/UserResponseDTO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/UserServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/exception/RuntimeExceptionHandler.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/exception/TokenGenerationException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/exception/TokenValidationException.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/model/Roles/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/model/entity/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/repository/RoleRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/repository/UserRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/CustomUserDetailsService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/security/TokenService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/sedders/AdminSeeder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/sedders/RoleSeeder.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/java/com/alberto/multidigitalwallet/user_service/service/UserService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/main/resources/application.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/test/java/com/alberto/multidigitalwallet/user_service/TestUserServiceApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/test/java/com/alberto/multidigitalwallet/user_service/TestcontainersConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service /user-service /src/test/java/com/alberto/multidigitalwallet/user_service/UserServiceApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/walletService/src/main/java/com/alberto/walletService/repository/WalletRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/walletService/src/main/java/com/alberto/walletService/repository/WalletRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/walletService/src/main/java/com/alberto/walletService/service/WalletService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/walletService/src/main/java/com/alberto/walletService/service/WalletService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +82,7 @@
     "Spring Boot.UserServiceApplication.executor": "Debug",
     "codeWithMe.voiceChat.enabledByDefault": "false",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "userService",
+    "git-widget-placeholder": "walletService",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/alberto/IdeaProjects/multidigitalwallet/services",
