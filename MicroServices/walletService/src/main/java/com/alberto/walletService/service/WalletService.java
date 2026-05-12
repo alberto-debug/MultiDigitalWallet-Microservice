@@ -2,14 +2,19 @@ package com.alberto.walletService.service;
 
 
 import com.alberto.walletService.DTOs.CreateWalletRequest;
+import com.alberto.walletService.DTOs.DepositRequest;
 import com.alberto.walletService.DTOs.WalletResponse;
+import com.alberto.walletService.DTOs.WithdrawRequest;
 import com.alberto.walletService.exception.WalletAlreadyExistsException;
 import com.alberto.walletService.exception.WalletNotFoundException;
 import com.alberto.walletService.mapper.WalletMapper;
+import com.alberto.walletService.model.ENUMs.TransactionType;
 import com.alberto.walletService.model.ENUMs.WalletStatus;
+import com.alberto.walletService.model.Transaction;
 import com.alberto.walletService.model.Wallet;
 import com.alberto.walletService.repository.TransactionRepository;
 import com.alberto.walletService.repository.WalletRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -55,8 +60,57 @@ public class WalletService {
 
     public BigDecimal getBalance(UUID walletId){
         return walletRepository.findById(walletId)
-                .orElseThrow(() -> new WalletNotFoundException("Wallet not found with id: " + walletId))
-                .getBalance();
+                .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId)).getBalance();
     }
+
+    @Transactional
+    public WalletResponse deposit(UUID walletId, DepositRequest depositRequest){
+
+        Wallet wallet = walletRepository.findById(walletId)
+                .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId));
+
+        wallet.setBalance(wallet.getBalance().add(depositRequest.amount()));
+
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.DEPOSIT);
+        transaction.setWalletId(walletId);
+        transaction.setAmount(depositRequest.amount());
+
+        transactionRepository.save(transaction);
+        Wallet saved = walletRepository.save(wallet);
+
+        return walletMapper.toResponse(saved);
+
+    }
+
+    @Transactional
+    public WalletResponse withdraw(UUID walletId, WithdrawRequest withdrawRequest){
+
+        Wallet wallet = walletRepository.findById(walletId)
+                .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId));
+
+        BigDecimal currentBalance = wallet.getBalance();
+        BigDecimal withdrawAmount = withdrawRequest.amount();
+
+        if (currentBalance.compareTo(withdrawAmount) < 0){
+
+            throw new IllegalArgumentException("Insufficient funds. Current balance: " + currentBalance);
+
+        }
+
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.WITHDRAWAL);
+        transaction.setWalletId(walletId);
+        transaction.setAmount(withdrawAmount);
+
+        transactionRepository.save(transaction);
+        wallet.setBalance(currentBalance.subtract(withdrawAmount));
+
+        Wallet saved = walletRepository.save(wallet);
+
+        return walletMapper.toResponse(saved);
+
+    }
+
 
 }

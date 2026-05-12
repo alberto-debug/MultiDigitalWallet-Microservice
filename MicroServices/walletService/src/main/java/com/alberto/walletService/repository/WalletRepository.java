@@ -5,6 +5,9 @@ import com.alberto.walletService.model.Wallet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,3 +19,5 @@ public interface WalletRepository extends JpaRepository<Wallet, UUID> {
     List<Wallet> findByUserId(UUID userId);
 
 }
+
+

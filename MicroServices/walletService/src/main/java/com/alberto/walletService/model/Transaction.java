@@ -20,7 +20,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private UUID walledId;
+    private UUID walletId;
     private UUID referenceId;
 
     @Enumerated(EnumType.STRING)
