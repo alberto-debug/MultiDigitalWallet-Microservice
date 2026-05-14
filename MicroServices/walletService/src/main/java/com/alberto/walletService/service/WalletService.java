@@ -1,10 +1,8 @@
 package com.alberto.walletService.service;
 
 
-import com.alberto.walletService.DTOs.CreateWalletRequest;
-import com.alberto.walletService.DTOs.DepositRequest;
-import com.alberto.walletService.DTOs.WalletResponse;
-import com.alberto.walletService.DTOs.WithdrawRequest;
+import com.alberto.walletService.DTOs.*;
+import com.alberto.walletService.exception.InsufficientBalanceException;
 import com.alberto.walletService.exception.WalletAlreadyExistsException;
 import com.alberto.walletService.exception.WalletNotFoundException;
 import com.alberto.walletService.mapper.WalletMapper;
@@ -29,6 +27,7 @@ public class WalletService {
     private final TransactionRepository transactionRepository;
     private final WalletRepository walletRepository;
     private final WalletMapper walletMapper;
+    private final TransferValidator transferValidator;
 
     public WalletResponse createWallet(UUID userId, CreateWalletRequest request){
 
@@ -83,6 +82,7 @@ public class WalletService {
 
     }
 
+
     @Transactional
     public WalletResponse withdraw(UUID walletId, WithdrawRequest withdrawRequest){
 
@@ -94,7 +94,7 @@ public class WalletService {
 
         if (currentBalance.compareTo(withdrawAmount) < 0){
 
-            throw new IllegalArgumentException("Insufficient funds. Current balance: " + currentBalance);
+            throw new InsufficientBalanceException("Insufficient funds. Current balance: " + currentBalance);
 
         }
 
@@ -112,5 +112,39 @@ public class WalletService {
 
     }
 
+
+
+    @Transactional
+    public WalletResponse transfer(TransferRequest transferRequest){
+
+        transferValidator.validateTransfer(transferRequest);
+
+
+        Wallet fromWallet = walletRepository.findById(transferRequest.fromWalletId()).get();
+
+        Wallet toWallet = walletRepository.findById(transferRequest.toWalletId()).get();
+
+
+        fromWallet.setBalance(fromWallet.getBalance().subtract(transferRequest.amount()));
+        toWallet.setBalance(toWallet.getBalance().add(transferRequest.amount()));
+
+        walletRepository.save(fromWallet);
+        walletRepository.save(toWallet);
+
+        Transaction transactionFrom = new Transaction();
+        transactionFrom.setTransactionType(TransactionType.WITHDRAWAL);
+        transactionFrom.setWalletId(transferRequest.fromWalletId());
+        transactionFrom.setAmount(transferRequest.amount());
+        transactionRepository.save(transactionFrom);
+
+        Transaction transactionTo = new Transaction();
+        transactionTo.setTransactionType(TransactionType.DEPOSIT);
+        transactionTo.setWalletId(transferRequest.toWalletId());
+        transactionTo.setAmount(transferRequest.amount());
+        transactionRepository.save(transactionTo);
+
+        return walletMapper.toResponse(fromWallet);
+
+    }
 
 }
