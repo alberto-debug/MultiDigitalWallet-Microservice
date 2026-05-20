@@ -2,6 +2,7 @@ package com.alberto.walletService.controller;
 
 import com.alberto.walletService.DTOs.ApiResponse;
 import com.alberto.walletService.DTOs.CreateWalletRequest;
+import com.alberto.walletService.DTOs.DepositRequest;
 import com.alberto.walletService.DTOs.WalletResponse;
 import com.alberto.walletService.service.WalletService;
 import jakarta.validation.Valid;
@@ -22,6 +23,7 @@ public class WalletController {
 
     private final WalletService walletService;
 
+
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<WalletResponse>> createWallet(
             @Valid @RequestBody CreateWalletRequest request,
@@ -35,6 +37,7 @@ public class WalletController {
                 .body(ApiResponse.ok("Wallet created successfully", wallet));
     }
 
+
     @GetMapping("/user")
     public ResponseEntity<ApiResponse<List<WalletResponse>>> listUserWallets(
             @RequestHeader("X-User-Id") UUID userId) {
@@ -42,6 +45,20 @@ public class WalletController {
         log.info("Fetching wallets for user: {}", userId);
         List<WalletResponse> wallets = walletService.getUserWallets(userId);
         return ResponseEntity.ok(ApiResponse.ok("Wallets retrieved successfully", wallets));
+    }
+
+
+    @PostMapping("/deposit/{walletId}")
+    public ResponseEntity<ApiResponse<WalletResponse>> deposit(@Valid @RequestBody DepositRequest depositRequest,
+                                                               @PathVariable UUID walletId) {
+
+        WalletResponse deposit = walletService.deposit(walletId, depositRequest);
+        log.info("Deposited {} to wallet {}", depositRequest.amount(), walletId);
+
+        String message = String.format("Deposit of %s completed successfully into wallet %s",
+                depositRequest.amount(), walletId);
+
+        return ResponseEntity.ok(ApiResponse.ok(message, deposit));
     }
 
 
