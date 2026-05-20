@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public record WithdrawRequest(
         @NotNull(message = "currency is required")
@@ -12,6 +13,9 @@ public record WithdrawRequest(
 
         @NotNull(message = "amount is required")
         @Positive(message = "amount must be greater than 0")
-        BigDecimal amount
+        BigDecimal amount,
+
+        @NotNull(message = "referenceId is required")
+        UUID referenceId
 ) {
 }

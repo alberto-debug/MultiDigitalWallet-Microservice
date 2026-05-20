@@ -17,6 +17,8 @@ import java.util.UUID;
 @Setter
 public class Wallet {
 
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -32,7 +34,18 @@ public class Wallet {
     private WalletStatus walletStatus;
 
     private LocalDateTime createdAt;
+
     private LocalDateTime updatedAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 
 }
