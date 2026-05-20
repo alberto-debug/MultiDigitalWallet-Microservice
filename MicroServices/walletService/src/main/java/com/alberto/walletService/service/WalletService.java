@@ -68,12 +68,19 @@ public class WalletService {
         Wallet wallet = walletRepository.findById(walletId)
                 .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId));
 
+        BigDecimal balanceBefore = wallet.getBalance();
         wallet.setBalance(wallet.getBalance().add(depositRequest.amount()));
+        BigDecimal balanceAfter = wallet.getBalance();
 
         Transaction transaction = new Transaction();
         transaction.setTransactionType(TransactionType.DEPOSIT);
         transaction.setWalletId(walletId);
         transaction.setAmount(depositRequest.amount());
+        transaction.setBalanceBefore(balanceBefore);
+        transaction.setBalanceAfter(balanceAfter);
+        transaction.setCurrency(wallet.getCurrency());
+        transaction.setReferenceId(depositRequest.referenceId());
+        transaction.setDescription("Deposit of " + depositRequest.amount() + " " + wallet.getCurrency());
 
         transactionRepository.save(transaction);
         Wallet saved = walletRepository.save(wallet);
@@ -98,14 +105,21 @@ public class WalletService {
 
         }
 
+        BigDecimal balanceBefore = currentBalance;
+        wallet.setBalance(currentBalance.subtract(withdrawAmount));
+        BigDecimal balanceAfter = wallet.getBalance();
+
         Transaction transaction = new Transaction();
         transaction.setTransactionType(TransactionType.WITHDRAWAL);
         transaction.setWalletId(walletId);
         transaction.setAmount(withdrawAmount);
+        transaction.setBalanceBefore(balanceBefore);
+        transaction.setBalanceAfter(balanceAfter);
+        transaction.setCurrency(wallet.getCurrency());
+        transaction.setReferenceId(withdrawRequest.referenceId());
+        transaction.setDescription("Withdrawal of " + withdrawAmount + " " + wallet.getCurrency());
 
         transactionRepository.save(transaction);
-        wallet.setBalance(currentBalance.subtract(withdrawAmount));
-
         Wallet saved = walletRepository.save(wallet);
 
         return walletMapper.toResponse(saved);
@@ -113,34 +127,48 @@ public class WalletService {
     }
 
 
-
     @Transactional
     public WalletResponse transfer(TransferRequest transferRequest){
 
         transferValidator.validateTransfer(transferRequest);
 
-
         Wallet fromWallet = walletRepository.findById(transferRequest.fromWalletId()).get();
-
         Wallet toWallet = walletRepository.findById(transferRequest.toWalletId()).get();
 
+        BigDecimal fromBalanceBefore = fromWallet.getBalance();
+        BigDecimal toBalanceBefore = toWallet.getBalance();
 
         fromWallet.setBalance(fromWallet.getBalance().subtract(transferRequest.amount()));
         toWallet.setBalance(toWallet.getBalance().add(transferRequest.amount()));
 
+        BigDecimal fromBalanceAfter = fromWallet.getBalance();
+        BigDecimal toBalanceAfter = toWallet.getBalance();
+
         walletRepository.save(fromWallet);
         walletRepository.save(toWallet);
+
 
         Transaction transactionFrom = new Transaction();
         transactionFrom.setTransactionType(TransactionType.WITHDRAWAL);
         transactionFrom.setWalletId(transferRequest.fromWalletId());
         transactionFrom.setAmount(transferRequest.amount());
+        transactionFrom.setBalanceBefore(fromBalanceBefore);
+        transactionFrom.setBalanceAfter(fromBalanceAfter);
+        transactionFrom.setCurrency(fromWallet.getCurrency());
+        transactionFrom.setReferenceId(transferRequest.referenceId());
+        transactionFrom.setDescription("Transfer to wallet " + transferRequest.toWalletId());
         transactionRepository.save(transactionFrom);
+
 
         Transaction transactionTo = new Transaction();
         transactionTo.setTransactionType(TransactionType.DEPOSIT);
         transactionTo.setWalletId(transferRequest.toWalletId());
         transactionTo.setAmount(transferRequest.amount());
+        transactionTo.setBalanceBefore(toBalanceBefore);
+        transactionTo.setBalanceAfter(toBalanceAfter);
+        transactionTo.setCurrency(toWallet.getCurrency());
+        transactionTo.setReferenceId(transferRequest.referenceId());
+        transactionTo.setDescription("Transfer from wallet " + transferRequest.fromWalletId());
         transactionRepository.save(transactionTo);
 
         return walletMapper.toResponse(fromWallet);

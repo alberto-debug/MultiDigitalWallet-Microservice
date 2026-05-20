@@ -27,14 +27,21 @@ public class Transaction {
     private TransactionType transactionType;
 
     private BigDecimal amount;
+
     private BigDecimal balanceBefore;
+
     private BigDecimal balanceAfter;
 
     @Enumerated(EnumType.STRING)
     private Currency currency;
 
     private String description;
+
     private LocalDateTime createdAt;
 
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
 }
