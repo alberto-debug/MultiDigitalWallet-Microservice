@@ -1,0 +1,80 @@
+/* Add your styles here */
+
+.app-logo {
+    border-radius: min(40%, var(--vaadin-radius-m));
+    margin-inline-start: var(--vaadin-padding-inline-container);
+}
+
+.app-name {
+    font-weight: 600;
+    font-size: var(--lumo-font-size-l);
+}
+
+.app-footer {
+    color: var(--vaadin-text-color-secondary);
+    font-size: var(--lumo-font-size-s);
+}
+
+/* TODO: This is only for demo purposes. You can delete it. */
+vaadin-side-nav:has(vaadin-side-nav-item:only-child)::after {
+    display: block;
+    content: "More menu items will appear here when you add more views.";
+    font-size: var(--lumo-font-size-s);
+    color: var(--vaadin-text-color-secondary);
+    box-sizing: border-box;
+    padding: 1em;
+    max-width: 14em;
+    min-width: 100%;
+    white-space: normal;
+}
+
+vaadin-login-form::part(form) {
+    box-shadow: inset 0 0 0 1px #ccc;
+    border-radius: var(--lumo-border-radius-l);
+}
+
+vaadin-login-form [slot="submit"] {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #ccc;
+}
+
+vaadin-login-form [slot="submit"]:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+.login-page-footer {
+    position: fixed;
+    font-size: 14px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 16px;
+    text-align: center;
+    background-color: #d9d9d9;
+    border-top: 1px solid #ccc;
+    z-index: 10;
+}
+
+.login-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    padding: 0 16px;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 10;
+}
+
+.login-navbar-title {
+    font-weight: 700;
+}
+
+.login-navbar-icon {
+    width: 40px;
+    height: 30px;
+}
