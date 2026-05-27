@@ -44,5 +44,37 @@ vaadin-login-form [slot="submit"]:hover {
     color: #000;
 }
 
+.login-page-footer {
+    position: fixed;
+    font-size: 14px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 12px 16px;
+    text-align: center;
+    background-color: #d9d9d9;
+    border-top: 1px solid #ccc;
+    z-index: 10;
+}
 
+.login-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 48px;
+    padding: 0 16px;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 10;
+}
 
+.login-navbar-title {
+    font-weight: 700;
+}
+
+.login-navbar-icon {
+    width: 40px;
+    height: 30px;
+}
