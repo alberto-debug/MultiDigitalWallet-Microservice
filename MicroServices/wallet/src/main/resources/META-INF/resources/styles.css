@@ -27,3 +27,22 @@ vaadin-side-nav:has(vaadin-side-nav-item:only-child)::after {
     min-width: 100%;
     white-space: normal;
 }
+
+vaadin-login-form::part(form) {
+    box-shadow: inset 0 0 0 1px #ccc;
+    border-radius: var(--lumo-border-radius-l);
+}
+
+vaadin-login-form [slot="submit"] {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #ccc;
+}
+
+vaadin-login-form [slot="submit"]:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+
+
