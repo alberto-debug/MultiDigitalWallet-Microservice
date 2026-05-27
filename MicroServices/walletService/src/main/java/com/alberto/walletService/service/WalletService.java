@@ -1,0 +1,178 @@
+package com.alberto.walletService.service;
+
+
+import com.alberto.walletService.DTOs.*;
+import com.alberto.walletService.exception.InsufficientBalanceException;
+import com.alberto.walletService.exception.WalletAlreadyExistsException;
+import com.alberto.walletService.exception.WalletNotFoundException;
+import com.alberto.walletService.mapper.WalletMapper;
+import com.alberto.walletService.model.ENUMs.TransactionType;
+import com.alberto.walletService.model.ENUMs.WalletStatus;
+import com.alberto.walletService.model.Transaction;
+import com.alberto.walletService.model.Wallet;
+import com.alberto.walletService.repository.TransactionRepository;
+import com.alberto.walletService.repository.WalletRepository;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
+
+@Service
+@RequiredArgsConstructor
+public class WalletService {
+
+    private final TransactionRepository transactionRepository;
+    private final WalletRepository walletRepository;
+    private final WalletMapper walletMapper;
+    private final TransferValidator transferValidator;
+
+    public WalletResponse createWallet(UUID userId, CreateWalletRequest request){
+
+        boolean alreadyExists = walletRepository.existsByUserIdAndCurrency(userId, request.currency());
+
+        if (alreadyExists){
+            throw new WalletAlreadyExistsException(
+                    "User already has a " + request.currency() + " wallet"
+            );
+        }
+
+        Wallet wallet = new Wallet();
+        wallet.setUserId(userId);
+        wallet.setCurrency(request.currency());
+        wallet.setBalance(BigDecimal.ZERO);
+        wallet.setWalletStatus(WalletStatus.ACTIVE);
+
+        Wallet saved = walletRepository.save(wallet);
+        
+        return walletMapper.toResponse(saved);
+    }
+
+    public List<WalletResponse> getUserWallets(UUID userId){
+        return walletRepository.findByUserId(userId)
+                .stream()
+                .map(walletMapper::toResponse)
+                .toList();
+    }
+
+    public BigDecimal getBalance(UUID walletId){
+        return walletRepository.findById(walletId)
+                .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId)).getBalance();
+    }
+
+    @Transactional
+    public WalletResponse deposit(UUID walletId, DepositRequest depositRequest){
+
+        Wallet wallet = walletRepository.findById(walletId)
+                .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId));
+
+        BigDecimal balanceBefore = wallet.getBalance();
+        wallet.setBalance(wallet.getBalance().add(depositRequest.amount()));
+        BigDecimal balanceAfter = wallet.getBalance();
+
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.DEPOSIT);
+        transaction.setWalletId(walletId);
+        transaction.setAmount(depositRequest.amount());
+        transaction.setBalanceBefore(balanceBefore);
+        transaction.setBalanceAfter(balanceAfter);
+        transaction.setCurrency(wallet.getCurrency());
+        transaction.setReferenceId(depositRequest.referenceId());
+        transaction.setDescription("Deposit of " + depositRequest.amount() + " " + wallet.getCurrency());
+
+        transactionRepository.save(transaction);
+        Wallet saved = walletRepository.save(wallet);
+
+        return walletMapper.toResponse(saved);
+
+    }
+
+
+    @Transactional
+    public WalletResponse withdraw(UUID walletId, WithdrawRequest withdrawRequest){
+
+        Wallet wallet = walletRepository.findById(walletId)
+                .orElseThrow(()-> new WalletNotFoundException("Wallet not found with id: " + walletId));
+
+        BigDecimal currentBalance = wallet.getBalance();
+        BigDecimal withdrawAmount = withdrawRequest.amount();
+
+        if (currentBalance.compareTo(withdrawAmount) < 0){
+
+            throw new InsufficientBalanceException("Insufficient funds. Current balance: " + currentBalance);
+
+        }
+
+        BigDecimal balanceBefore = currentBalance;
+        wallet.setBalance(currentBalance.subtract(withdrawAmount));
+        BigDecimal balanceAfter = wallet.getBalance();
+
+        Transaction transaction = new Transaction();
+        transaction.setTransactionType(TransactionType.WITHDRAWAL);
+        transaction.setWalletId(walletId);
+        transaction.setAmount(withdrawAmount);
+        transaction.setBalanceBefore(balanceBefore);
+        transaction.setBalanceAfter(balanceAfter);
+        transaction.setCurrency(wallet.getCurrency());
+        transaction.setReferenceId(withdrawRequest.referenceId());
+        transaction.setDescription("Withdrawal of " + withdrawAmount + " " + wallet.getCurrency());
+
+        transactionRepository.save(transaction);
+        Wallet saved = walletRepository.save(wallet);
+
+        return walletMapper.toResponse(saved);
+
+    }
+
+
+    @Transactional
+    public WalletResponse transfer(TransferRequest transferRequest){
+
+        transferValidator.validateTransfer(transferRequest);
+
+        Wallet fromWallet = walletRepository.findById(transferRequest.fromWalletId()).get();
+        Wallet toWallet = walletRepository.findById(transferRequest.toWalletId()).get();
+
+        BigDecimal fromBalanceBefore = fromWallet.getBalance();
+        BigDecimal toBalanceBefore = toWallet.getBalance();
+
+        fromWallet.setBalance(fromWallet.getBalance().subtract(transferRequest.amount()));
+        toWallet.setBalance(toWallet.getBalance().add(transferRequest.amount()));
+
+        BigDecimal fromBalanceAfter = fromWallet.getBalance();
+        BigDecimal toBalanceAfter = toWallet.getBalance();
+
+        walletRepository.save(fromWallet);
+        walletRepository.save(toWallet);
+
+
+        Transaction transactionFrom = new Transaction();
+        transactionFrom.setTransactionType(TransactionType.WITHDRAWAL);
+        transactionFrom.setWalletId(transferRequest.fromWalletId());
+        transactionFrom.setAmount(transferRequest.amount());
+        transactionFrom.setBalanceBefore(fromBalanceBefore);
+        transactionFrom.setBalanceAfter(fromBalanceAfter);
+        transactionFrom.setCurrency(fromWallet.getCurrency());
+        transactionFrom.setReferenceId(transferRequest.referenceId());
+        transactionFrom.setDescription("Transfer to wallet " + transferRequest.toWalletId());
+        transactionRepository.save(transactionFrom);
+
+
+        Transaction transactionTo = new Transaction();
+        transactionTo.setTransactionType(TransactionType.DEPOSIT);
+        transactionTo.setWalletId(transferRequest.toWalletId());
+        transactionTo.setAmount(transferRequest.amount());
+        transactionTo.setBalanceBefore(toBalanceBefore);
+        transactionTo.setBalanceAfter(toBalanceAfter);
+        transactionTo.setCurrency(toWallet.getCurrency());
+        transactionTo.setReferenceId(transferRequest.referenceId());
+        transactionTo.setDescription("Transfer from wallet " + transferRequest.fromWalletId());
+        transactionRepository.save(transactionTo);
+
+        return walletMapper.toResponse(fromWallet);
+
+    }
+
+}
