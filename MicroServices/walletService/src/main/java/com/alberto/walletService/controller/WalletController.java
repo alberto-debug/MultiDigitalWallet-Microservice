@@ -23,7 +23,6 @@ public class WalletController {
 
     private final WalletService walletService;
 
-
     @PostMapping("/create")
     public ResponseEntity<ApiResponse<WalletResponse>> createWallet(
             @Valid @RequestBody CreateWalletRequest request,
@@ -37,7 +36,6 @@ public class WalletController {
                 .body(ApiResponse.ok("Wallet created successfully", wallet));
     }
 
-
     @GetMapping("/user")
     public ResponseEntity<ApiResponse<List<WalletResponse>>> listUserWallets(
             @RequestHeader("X-User-Id") UUID userId) {
@@ -46,7 +44,6 @@ public class WalletController {
         List<WalletResponse> wallets = walletService.getUserWallets(userId);
         return ResponseEntity.ok(ApiResponse.ok("Wallets retrieved successfully", wallets));
     }
-
 
     @PostMapping("/deposit/{walletId}")
     public ResponseEntity<ApiResponse<WalletResponse>> deposit(@Valid @RequestBody DepositRequest depositRequest,
@@ -60,9 +57,5 @@ public class WalletController {
 
         return ResponseEntity.ok(ApiResponse.ok(message, deposit));
     }
-
-
-
-
 
 }
