@@ -30,7 +30,8 @@ public class TransferValidator {
         Wallet toWallet = walletRepository.findById(toWalletId)
                 .orElseThrow(() -> new WalletNotFoundException("Destination wallet not found with id: " + toWalletId));
     }
-    
+
+
     private void validateWalletsAreDifferent(UUID fromWalletId, UUID toWalletId) {
         if (fromWalletId.equals(toWalletId)) {
             throw new IllegalArgumentException("Source and destination wallets must be different");
