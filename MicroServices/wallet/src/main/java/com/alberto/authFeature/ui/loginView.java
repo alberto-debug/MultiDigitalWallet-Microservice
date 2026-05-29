@@ -5,6 +5,8 @@ import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.login.LoginForm;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
+import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.progressbar.ProgressBar;
@@ -12,6 +14,7 @@ import com.vaadin.flow.router.Layout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLayout;
+import com.vaadin.flow.router.RouterLink;
 
 
 @Route(value = "", autoLayout = false)
@@ -38,7 +41,9 @@ public class loginView extends VerticalLayout implements RouterLayout {
         LoginForm loginForm = new LoginForm();
         loginForm.setAction("login");
 
-        VerticalLayout content = new VerticalLayout(loginForm);
+        RouterLink registerLink = new RouterLink("Create account", RegisterView.class);
+
+        VerticalLayout content = new VerticalLayout(loginForm, registerLink);
         content.setAlignItems(Alignment.CENTER);
         content.setSpacing(false);
 

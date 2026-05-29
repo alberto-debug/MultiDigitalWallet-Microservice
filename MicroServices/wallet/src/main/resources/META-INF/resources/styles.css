@@ -1,3 +1,4 @@
+@import "./theme-editor.css";
 /* Add your styles here */
 
 .app-logo {
@@ -77,4 +78,28 @@ vaadin-login-form [slot="submit"]:hover {
 .login-navbar-icon {
     width: 40px;
     height: 30px;
+}
+
+.register-card {
+    box-shadow: inset 0 0 0 1px #ccc;
+    border-radius: var(--lumo-border-radius-l);
+    background-color: #fff;
+    padding: 24px;
+    width: min(90vw, 520px);
+}
+
+.password-strength {
+    font-weight: 600;
+}
+
+.password-strength.weak {
+    color: #b91c1c;
+}
+
+.password-strength.moderate {
+    color: #f59e0b;
+}
+
+.password-strength.strong {
+    color: #15803d;
 }
