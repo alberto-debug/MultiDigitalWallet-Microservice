@@ -22,7 +22,6 @@ import com.vaadin.flow.server.menu.MenuConfiguration;
 import com.vaadin.flow.server.menu.MenuEntry;
 import com.vaadin.flow.theme.lumo.LumoUtility;
 import jakarta.annotation.security.PermitAll;
-import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -62,17 +61,23 @@ import org.springframework.security.core.userdetails.UserDetails;
                     var username = new Span(user.getUsername());
                     username.addClassName("user-name");
 
-                    var status = new Span();
-                    status.setVisible(false);
+                    var dialog = new ConfirmDialog();
+                    dialog.setHeader("Log out?");
+                    dialog.setText("Are you sure you want to log out?");
+                    dialog.setCancelable(true);
+                    dialog.setConfirmText("Log out");
+                    dialog.setConfirmButtonTheme("error primary");
+                    dialog.addConfirmListener(event -> securityService.logout());
 
-                    var logout = getButton(user, status);
+                    var logout = new Button(new Icon(VaadinIcon.SIGN_OUT), e -> dialog.open());
+                    logout.addClassName("logout-button");
+                    logout.setAriaLabel("Log out " + user.getUsername());
                     return new HorizontalLayout(new DrawerToggle(),
                             appLogo,
                             appName,
                             avatarBasic,
                             username,
-                            logout,
-                            status);
+                            logout);
                 })
                 .orElseGet(() -> new HorizontalLayout(new DrawerToggle(), appLogo));
 
@@ -87,30 +92,6 @@ import org.springframework.security.core.userdetails.UserDetails;
         header.setPadding(true);
 
         return header;
-    }
-
-    private @NonNull Button getButton(UserDetails user, Span status) {
-        var dialog = new ConfirmDialog();
-        dialog.setHeader("Log out?");
-        dialog.setText("Are you sure you want to log out?");
-        dialog.setCancelable(true);
-        dialog.addCancelListener(event -> setStatus(status, "Canceled"));
-        dialog.setConfirmText("Log out");
-        dialog.setConfirmButtonTheme("error primary");
-        dialog.addConfirmListener(event -> {
-            setStatus(status, "Logged out");
-            securityService.logout();
-        });
-
-        var logout = new Button(new Icon(VaadinIcon.SIGN_OUT), e -> dialog.open());
-        logout.addClassName("logout-button");
-        logout.setAriaLabel("Log out " + user.getUsername());
-        return logout;
-    }
-
-    private void setStatus(Span status, String text) {
-        status.setText(text);
-        status.setVisible(true);
     }
 
     private Component createApplicationDrawer() {
