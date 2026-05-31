@@ -1,5 +1,6 @@
 package com.alberto.examplefeature;
 
+import jakarta.annotation.security.PermitAll;
 import jakarta.persistence.*;
 import org.jspecify.annotations.Nullable;
 
