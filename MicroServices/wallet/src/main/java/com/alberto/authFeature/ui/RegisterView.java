@@ -11,8 +11,6 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -22,9 +20,11 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route(value = "register", autoLayout = false)
 @PageTitle("Register - MultiDigitalWallet")
+@AnonymousAllowed
 public class RegisterView extends VerticalLayout {
 
     public RegisterView() {
@@ -86,7 +86,7 @@ public class RegisterView extends VerticalLayout {
 
         HorizontalLayout buttonLayout = new HorizontalLayout(createAccount, cancel);
 
-        RouterLink loginLink = new RouterLink("Already have an account? Login", loginView.class);
+        RouterLink loginLink = new RouterLink("Already have an account? Login", LoginView.class);
 
         H3 registerTitle = new H3("Register");
 

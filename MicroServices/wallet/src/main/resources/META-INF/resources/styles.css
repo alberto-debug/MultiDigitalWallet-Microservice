@@ -7,13 +7,65 @@
 }
 
 .app-name {
-    font-weight: 600;
+    font-weight: 700;
     font-size: var(--lumo-font-size-l);
 }
 
 .app-footer {
     color: var(--vaadin-text-color-secondary);
     font-size: var(--lumo-font-size-s);
+}
+
+.app-navbar {
+    border-bottom: 1px solid var(--lumo-contrast-10pct);
+}
+
+.logout-button {
+
+    background: #ffffff;
+
+    color: #000000;
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 14px;
+
+    padding: 12px 22px;
+
+    font-weight: 600;
+
+    backdrop-filter: blur(10px);
+
+
+
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+
+
+    box-shadow:
+
+            0 8px 20px rgba(0,0,0,0.12),
+
+            inset 0 1px 0 rgba(255,255,255,0.08);
+
+}
+
+
+
+.logout-button:hover {
+
+    transform: translateY(-4px);
+
+    background: #fff;
+
+    color: #111;
+
+    border-color: #111;
+
+    box-shadow:
+
+            0 14px 30px rgba(0,0,0,0.18);
+
 }
 
 /* TODO: This is only for demo purposes. You can delete it. */

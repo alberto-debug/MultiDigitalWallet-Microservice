@@ -1,27 +1,28 @@
 package com.alberto.authFeature.ui;
 
+import com.alberto.security.SecurityService;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.login.LoginForm;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.Alignment;
-import com.vaadin.flow.component.orderedlayout.FlexComponent.JustifyContentMode;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.progressbar.ProgressBar;
-import com.vaadin.flow.router.Layout;
-import com.vaadin.flow.router.PageTitle;
-import com.vaadin.flow.router.Route;
-import com.vaadin.flow.router.RouterLayout;
-import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.router.*;
+import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 
-@Route(value = "", autoLayout = false)
+@Route(value = "login", autoLayout = false)
 @PageTitle("Login Page")
-public class loginView extends VerticalLayout implements RouterLayout {
+@AnonymousAllowed
+public class LoginView extends VerticalLayout implements RouterLayout, BeforeEnterObserver {
 
-    loginView(){
+    private final SecurityService securityService;
+
+    LoginForm loginForm = new LoginForm();
+
+    LoginView(SecurityService securityService){
+        this.securityService = securityService;
 
         setSizeFull();
         setAlignItems(Alignment.CENTER);
@@ -38,7 +39,6 @@ public class loginView extends VerticalLayout implements RouterLayout {
 
         navbar.add(navbarIcon, navbarTitle);
 
-        LoginForm loginForm = new LoginForm();
         loginForm.setAction("login");
 
         RouterLink registerLink = new RouterLink("Create account", RegisterView.class);
@@ -53,6 +53,24 @@ public class loginView extends VerticalLayout implements RouterLayout {
 
         add(navbar, content, pageFooter);
 
+
+    }
+
+    @Override
+    public void beforeEnter(BeforeEnterEvent event) {
+
+//        if (securityService.getAuthenticatedUser().isPresent()) {
+//            event.forwardTo(TaskListView.class);
+//            return;
+//        }
+
+        if (event.getLocation()
+
+                .getQueryParameters()
+                .getParameters()
+                .containsKey("error")){
+            loginForm.setError(true);
+        }
     }
 
 
