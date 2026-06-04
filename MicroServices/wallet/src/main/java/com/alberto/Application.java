@@ -16,7 +16,7 @@ import com.vaadin.flow.component.page.AppShellConfigurator;
         name = "MultiDigital Wallet",
         shortName = "MDW",
         offlinePath="offline.html",
-        offlineResources = { "images/wallet.png" }
+        offlineResources = { "images/offline.png" }
 )
 public class Application implements AppShellConfigurator {
 
