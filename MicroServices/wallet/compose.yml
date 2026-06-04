@@ -5,6 +5,8 @@ services:
       - 'POSTGRES_DB=userdb'
       - 'POSTGRES_USER=${DB_USERNAME}'
       - 'POSTGRES_PASSWORD=${DB_PASSWORD}'
+      - 'JWT_SECRET: ${JWT_SECRET}'
+      - 'JWT_ISSUER: ${JWT_ISSUER'
     ports:
       - '5433:5432'
 

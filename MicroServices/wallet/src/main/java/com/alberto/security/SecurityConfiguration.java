@@ -4,6 +4,7 @@ import com.alberto.authFeature.ui.LoginView;
 import com.vaadin.flow.spring.security.VaadinSecurityConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -13,6 +14,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
+@EnableMethodSecurity
 @Configuration
 public class SecurityConfiguration {
 
@@ -43,16 +45,15 @@ public class SecurityConfiguration {
 
     @Bean
     public UserDetailsManager userDetailsService() {
-        UserDetails user =
-                User.withUsername("user")
-                        .password("{noop}user")
-                        .roles("USER")
-                        .build();
-        UserDetails admin =
-                User.withUsername("admin")
-                        .password("{noop}admin")
-                        .roles("ADMIN")
-                        .build();
-        return new InMemoryUserDetailsManager(user, admin);
+        UserDetails admin = User.withUsername("admin")
+                .password("{noop}admin123")
+                .roles("ADMIN")
+                .build();
+        UserDetails user = User.withUsername("user")
+                .password("{noop}user123")
+                .roles("USER")
+                .build();
+        return new InMemoryUserDetailsManager(admin, user);
     }
+
 }
