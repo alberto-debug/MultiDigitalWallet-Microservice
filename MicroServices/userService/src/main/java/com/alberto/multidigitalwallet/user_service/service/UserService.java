@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Service
@@ -25,10 +26,24 @@ public class UserService {
 
 
     public User authenticate(String email, String password){
-        User user = userRepository.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("User not found"));
-        if (!passwordEncoder.matches(password, user.getPassword())){
-            throw  new IllegalArgumentException("Invalid Password");
+       // User user = userRepository.findByEmail(email).orElseThrow(()-> new UsernameNotFoundException("User not found"));
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> {
+                    log.warn("User not found: {}", email);
+                    return new UsernameNotFoundException("User not found");
+                });
+
+//        if (!passwordEncoder.matches(password, user.getPassword())){
+//            throw  new IllegalArgumentException("Invalid Password");
+//        }
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            log.warn("Invalid password for user: {}", email);
+            throw new IllegalArgumentException("Invalid Password");
         }
+
+        log.info("User successfully authenticated: {},  at {}", email, LocalDateTime.now());
 
         return user;
     }
