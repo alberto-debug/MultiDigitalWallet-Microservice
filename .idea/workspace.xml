@@ -4,32 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="Implementation of AuthController and DTOs fixes">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/DTOs/LoginRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/DTOs/LoginResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/integration/AuthenticationClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/integration/WebClientConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/AuthTokenCookieService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/JwtConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/JwtTokenService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/userService/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/userService/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/userService/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/userService/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/userService/src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/userService/src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/userService/src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/userService/src/main/java/com/alberto/multidigitalwallet/user_service/security/SecurityFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/userService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/userService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/authFeature/ui/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/authFeature/ui/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/SecurityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/security/SecurityService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MicroServices/walletService/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/walletService/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-    </list>
+    <list default="true" id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="Fixed VErsion of All Docker services working toguether using docker componse up --build" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -232,7 +207,15 @@
       <option name="project" value="LOCAL" />
       <updated>1777420077144</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed VErsion of All Docker services working toguether using docker componse up --build">
+      <option name="closed" value="true" />
+      <created>1780607686495</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1780607686498</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +227,8 @@
     <MESSAGE value="Fixes in UserService and additions in DTOs for login request and response." />
     <MESSAGE value="Readme" />
     <MESSAGE value="Implementation of AuthController and DTOs fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implementation of AuthController and DTOs fixes" />
+    <MESSAGE value="Fixed VErsion of All Docker services working toguether using docker componse up --build" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed VErsion of All Docker services working toguether using docker componse up --build" />
   </component>
   <component name="github-copilot-workspace">
     <instructionFileLocations>
