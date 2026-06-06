@@ -19,6 +19,7 @@ import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.progressbar.ProgressBar;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
@@ -102,10 +103,14 @@ public class RegisterView extends VerticalLayout {
         formLayout.addFormRow(passwordField, confirmPassword);
         formLayout.setWidthFull();
 
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setIndeterminate(true);
+        progressBar.setVisible(false);
+
         Button createAccount = new Button("Create account");
         createAccount.addThemeVariants(ButtonVariant.PRIMARY);
-        Button cancel = new Button("Cancel");
 
+        Button cancel = new Button("Cancel");
         cancel.addClickListener(e -> UI.getCurrent().navigate("login"));
 
         createAccount.addClickListener(e -> {
@@ -116,6 +121,7 @@ public class RegisterView extends VerticalLayout {
 
             createAccount.setEnabled(false);
             cancel.setEnabled(false);
+            progressBar.setVisible(true);
 
             final UI ui           = UI.getCurrent();
             final String fullName = firstName.getValue().trim() + " " + lastName.getValue().trim();
@@ -124,9 +130,10 @@ public class RegisterView extends VerticalLayout {
             CompletableFuture.runAsync(() -> {
                 try {
 
-                    authenticationClient.register(emailVal, passwordField.getValue(), fullName);
+                    authenticationClient.register(fullName, emailVal, passwordField.getValue());
 
                     ui.access(() -> {
+                        progressBar.setVisible(false);
                         Notification n = Notification.show("Account created! Welcome to MDW 🎉", 4000, Notification.Position.TOP_CENTER);
                         n.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                         ui.navigate("login");
@@ -137,6 +144,7 @@ public class RegisterView extends VerticalLayout {
                     log.error("Registration failed for email={}", emailVal, ex);
 
                     ui.access(() -> {
+                        progressBar.setVisible(false);
                         Notification n = Notification.show("Registration failed. Please try again later.", 5000, Notification.Position.TOP_CENTER);
                         n.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     });
@@ -157,7 +165,7 @@ public class RegisterView extends VerticalLayout {
 
         HorizontalLayout buttonLayout = new HorizontalLayout(createAccount, cancel);
 
-        Div registerCard = new Div(registerTitle, formLayout, buttonLayout, loginLink);
+        Div registerCard = new Div(registerTitle, formLayout, buttonLayout, progressBar, loginLink);
         registerCard.addClassName("register-card");
 
         VerticalLayout content = new VerticalLayout(registerCard);
