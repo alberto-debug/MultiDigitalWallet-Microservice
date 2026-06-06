@@ -134,7 +134,7 @@ public class RegisterView extends VerticalLayout {
 
                     ui.access(() -> {
                         progressBar.setVisible(false);
-                        Notification n = Notification.show("Account created! Welcome to MDW 🎉", 4000, Notification.Position.TOP_CENTER);
+                        Notification n = Notification.show("Account created! Welcome to MDW", 4000, Notification.Position.TOP_END);
                         n.addThemeVariants(NotificationVariant.LUMO_SUCCESS);
                         ui.navigate("login");
                     });
@@ -145,7 +145,7 @@ public class RegisterView extends VerticalLayout {
 
                     ui.access(() -> {
                         progressBar.setVisible(false);
-                        Notification n = Notification.show("Registration failed. Please try again later.", 5000, Notification.Position.TOP_CENTER);
+                        Notification n = Notification.show("Registration failed. Please try again later.", 5000, Notification.Position.TOP_END);
                         n.addThemeVariants(NotificationVariant.LUMO_ERROR);
                     });
 
