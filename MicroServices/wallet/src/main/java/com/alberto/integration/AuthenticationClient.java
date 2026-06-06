@@ -3,6 +3,7 @@ package com.alberto.integration;
 import com.alberto.DTOs.ApiLoginResponseDTO;
 import com.alberto.DTOs.LoginRequest;
 import com.alberto.DTOs.LoginResponse;
+import com.alberto.DTOs.RegisterRequestDTO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -49,5 +50,30 @@ public class AuthenticationClient {
                 .onErrorMap(ex -> new RuntimeException("Authentication service error: " + ex.getMessage(), ex))
                 .block();
     }
+
+    public ApiLoginResponseDTO register(String name, String email, String password) throws Exception{
+
+        RegisterRequestDTO requestDTO = new RegisterRequestDTO(name, email, password);
+
+        return webClient.post()
+                .uri("/auth/register")
+                .bodyValue(requestDTO)
+                .retrieve()
+                .toEntity(ApiLoginResponseDTO.class)
+                .map( entity -> {
+                    ApiLoginResponseDTO apiResponse = entity.getBody();
+
+                    if (apiResponse == null || !apiResponse.success() || apiResponse.data() == null) {
+                        throw new RuntimeException("Invalid response from auth service");
+                    }
+                    return apiResponse;
+
+
+                } )    .onErrorMap(ex ->
+                        new RuntimeException("Register service error: " + ex.getMessage(), ex)
+                )
+                .block();
+    }
+
 
 }
