@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="Fixed VErsion of All Docker services working toguether using docker componse up --build" />
+    <list default="true" id="925686d9-fb50-426a-9dd0-175bb127fd87" name="Changes" comment="Fixed VErsion of All Docker services working toguether using docker componse up --build">
+      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/DTOs/RegisterRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/authFeature/ui/util/PasswordStrengthEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/authFeature/ui/RegisterView.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/authFeature/ui/RegisterView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/integration/AuthenticationClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/MicroServices/wallet/src/main/java/com/alberto/integration/AuthenticationClient.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
